@@ -1,0 +1,48 @@
+*{
+  box-sizing:border-box;
+  margin:0px;
+  padding:0px;
+}
+
+/*Max Screen Size - 6 items*/
+.container {
+  margin: 0 auto;                  /* center container */
+  width: 1480px;                  /*Maximum supported container size*/
+  font-size: 0; 
+}
+
+  
+.item {                            /*Total Size is Width + Left + Right Margin*/
+  display: inline-block;
+  font-size: 18px;                 /* restore font size removed in container */
+  width: 320px;                    /*Size of the Element with border DEFAULT: 150px*/
+  height: 50px;
+  line-height: 50px;
+  margin: 15px 25px;               /*Gutter is 25 pixels*/
+  text-align: center;
+  border: 1px solid black;
+}
+
+/*Small screen size -*/
+@media screen and (max-width: 430px) {
+  .container{width:100%;} 
+  .item { 
+          width: 100%;
+          margin:0px;
+
+      } 
+  }
+
+
+/* Row Breaks */
+/*1 item floating until we can reach 2 item width*/
+@media screen and (min-width: 431px) and (max-width: 739px) { .container { width: 400px; } } /*Default Width 400px*/
+
+/*2 Items - Min width = 2 items + margin gutters; Max Width is 1 pixel less than 3*/
+@media screen and (min-width: 740px) and (max-width: 1109px) { .container { width:740px;  } }
+
+/*3 Items - Min Width = 3 items + margin gutters; Max width 1 pixel less than 4*/
+@media screen and (min-width: 1110px) and (max-width: 1479px) { .container { width: 1110px; } }
+
+/*4 Items*/
+/* @media screen and (min-width: 1031px) and (max-width: 1230px) { .container { width: 1000px; } } */
