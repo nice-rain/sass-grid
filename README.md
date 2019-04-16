@@ -1,68 +1,19 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# SASS Grid Template
+This project is a React example using my sass grid template. The template is located at `src/grid.scss` and may be used within another project by importing it.
 
-## Available Scripts
+## Background
 
-In the project directory, you can run:
+I was recently creating a card grid for a project that I was working on. I could easily get the items to display using flex, but wrapping would leave white-space on the right side once an item wrapped. I wanted all items to be centered within a container and automatically wrap when the container was too small for a given screen. Originally, I manually created a .css file to handle the grid for the project, but I didn't want to go through the headache of setting up and changing all variables again. 
 
-### `npm start`
+### Enter sass-grid
+This is an scss file designed to help you setup and generate @media queries based upon fixed card sizes placed within a grid. Because I do not use `grid` layout in css, cross-browser compatibility is much greater (as long as your browser supports @media queries).
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Features
+* Generates @media query breakpoints for mobile and desktop screen sizes using a grid layout.
+* Allows you to specify specific card widths and will change the breakpoints on compile.
+* Modular .scss file enables you to drop it easily into any project. (you may need to rename the classes if you already have .item and .container in your css files)
+* Allows you to specify a maximum container width OR a maximum number of items that you want to allow in a given row.
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+## Demo
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+Once you clone the project, run `npm install` to install all dependencies. Once dependencies are installed, run `npm start` to and open the project in your browser. You can test responsive behavior as well as grid settings that you may have chosen in the scss file.
