@@ -9,12 +9,17 @@
 //=======================================================
 // Global Variables
 //======================================================= 
-$max-container-width: 1500px;       //Maximum supported container size, including border (will round container to nearest size down)
-$use-container-max: false !default;  //use our container max width or generate it
+$max-container-width: 1500px;                   //Maximum supported container size, including border (will round container to nearest size down)
+$use-container-max: false !default;             //use our container max width or generate it
 
-$item-width: 320px;                 //Item size including border
-$gutter-width: 25px;                //This is just a left/right margin. Gutter between items is double this.
-$max-items: 5;                      //Maximum number of columns in a given row
+$item-width: 320px;                             //Item size including border
+$item-height: 50px;
+$gutter-width: 25px;                            //This is just a left/right margin. Gutter between items is double this.
+$max-items: 5;                                  //Maximum number of columns in a given row
+
+$item-size: $item-width + 2 * $gutter-width;    //Total size of an item + gutter
+
+$mobile-width: 430px;                           //Mobile breakpoint (replaced by item-size if smaller than item-size)
 
 //=======================================================
 // Mixin
@@ -63,6 +68,19 @@ $max-items: 5;                      //Maximum number of columns in a given row
   @return (($num+1) * $item-width + ($num+1) * $gutter-width * 2) - 1;
 }
 
+//Calculates our mobile breakpoint correctly
+@function calculate-mobile-break()
+{
+  @if($mobile-width < $item-size)
+  {
+    @return $item-size;
+  }
+  @else
+  {
+    @return $mobile-width;
+  }
+}
+
 //=======================================================
 // CSS
 //=======================================================
@@ -86,7 +104,7 @@ $max-items: 5;                      //Maximum number of columns in a given row
   display: inline-block;
   font-size: 18px;                 /* restore font size removed in container */
   width: $item-width;                    /*Size of the Element with border DEFAULT: 150px*/
-  height: 50px;
+  height: $item-height;
   line-height: 50px;
   margin: 15px $gutter-width;               /*Gutter is 25 pixels*/
   text-align: center;
@@ -94,7 +112,7 @@ $max-items: 5;                      //Maximum number of columns in a given row
 }
 
 /* Mobile Screen size */
-@media screen and (max-width: 430px) {
+@media screen and (max-width: calculate-mobile-break()) {
   .container{
     width:100%;
     min-height:0px;
