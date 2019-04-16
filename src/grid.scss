@@ -4,6 +4,8 @@
  *
  * Note 1: If you don't want a global box-sizing, make sure to include it within both your item
  * and container tags.
+ *
+ * Note 2: If you want a border around the container, you need to add 2*border-width to container calculations.
  */
 
 //=======================================================
@@ -13,11 +15,9 @@ $max-container-width: 1500px;                   //Maximum supported container si
 $use-container-max: false !default;             //use our container max width or generate it
 
 $item-width: 320px;                             //Item size including border
-$item-height: 50px;
+$item-height: 120px;
 $gutter-width: 25px;                            //This is just a left/right margin. Gutter between items is double this.
-$max-items: 5;                                  //Maximum number of columns in a given row
-
-$item-size: $item-width + 2 * $gutter-width;    //Total size of an item + gutter
+$max-items: 10;                                  //Maximum number of columns in a given row
 
 $mobile-width: 430px;                           //Mobile breakpoint (replaced by item-size if smaller than item-size)
 
@@ -33,7 +33,7 @@ $mobile-width: 430px;                           //Mobile breakpoint (replaced by
 //Mixin that generates our column breaks depending on the number of items
 @mixin column-breaks($num-items)
 {
-  @for $i from 1 through $num-items
+  @for $i from calculate-starting-item-number() through $num-items
   {
     @media screen and (min-width: calculate-min($i)) and (max-width: calculate-max($i)) {@include container(calculate-min($i))}
   }
@@ -42,6 +42,10 @@ $mobile-width: 430px;                           //Mobile breakpoint (replaced by
 //=======================================================
 // Functions
 //=======================================================
+
+
+//Calculates our item size, please don't change this.
+$item-size: $item-width + 2 * $gutter-width;
 
 //Calculates the max number of items per row
 @function calculate-item-max()
@@ -71,13 +75,26 @@ $mobile-width: 430px;                           //Mobile breakpoint (replaced by
 //Calculates our mobile breakpoint correctly
 @function calculate-mobile-break()
 {
-  @if($mobile-width < $item-size)
+  @if($mobile-width <= $item-size)
   {
-    @return $item-size;
+    @return $item-size - 1;
   }
   @else
   {
-    @return $mobile-width;
+    @return calculate-starting-item-number() * $item-size - 1;
+  }
+}
+
+//Calculates our starting number of items past our mobile breakpoint
+@function calculate-starting-item-number()
+{
+  @if($mobile-width <= $item-size)
+  {
+    @return 1;
+  }
+  @else
+  {
+    @return ceil($mobile-width/$item-size);
   }
 }
 
@@ -91,7 +108,7 @@ $mobile-width: 430px;                           //Mobile breakpoint (replaced by
   padding:0px;
 }
 
-/*Max Screen Size - 6 items*/
+/*Container that holds our items*/
 .container {
   margin: 0 auto;                               /* center container */
   width: calculate-item-max() * ($item-width + $gutter-width * 2);                  /*Maximum supported container size*/
