@@ -18,7 +18,7 @@ const generateItems = numItems =>{
 export default function MainContent(props)
 {
     return( <main>
-                <h1>Test Grid</h1>
+                <h1>SASS Grid Sample</h1>
                 <div className="container">
                     {generateItems(6)}
                 </div>
